@@ -9,8 +9,8 @@ var path = require('path');
 var sqlite3 = require('sqlite3');
 
 var baseURL = 'https://developer.chrome.com/extensions/';
-var docsetName = 'Chrome_Extensions_API';
-var baseDir = docsetName + '.docset/';
+var docsetName = 'Chrome Extensions API';
+var baseDir = docsetName.replace(/ /g, '_') + '.docset/';
 var docDir = baseDir + 'Contents/Resources/Documents/';
 var localPages = {};
 var index = {};
@@ -240,13 +240,13 @@ var queue = [
             '<plist version="1.0">',
             '<dict>',
             '	<key>CFBundleIdentifier</key>',
-            '	<string>' + docsetName + '</string>',
+            '	<string>chrome</string>',
             '	<key>CFBundleName</key>',
             '	<string>' + docsetName + '</string>',
             '	<key>DashDocSetFamily</key>',
             '	<string>javascript</string>',
             '	<key>DocSetPlatformFamily</key>',
-            '	<string>' + docsetName.toLowerCase() + '</string>',
+            '	<string>chrome</string>',
             '	<key>dashIndexFilePath</key>',
             '	<string>index.html</string>',
             '	<key>isDashDocset</key>',
