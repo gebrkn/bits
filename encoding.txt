@@ -1,129 +1,129 @@
-7f = 
-80 = €
-81 = 
-82 = ‚
-83 = ƒ
-84 = „
-85 = …
-86 = †
-87 = ‡
-88 = ˆ
-89 = ‰
-8a = Š
-8b = ‹
-8c = Œ
-8d = 
-8e = 
-8f = 
-90 = 
-91 = ‘
-92 = ’
-93 = “
-94 = ”
-95 = •
-96 = –
-97 = —
-98 = ˜
-99 = ™
-9a = š
-9b = ›
-9c = œ
-9d = 
-9e = 
-9f = Ÿ
-a0 =  
-a1 = ¡
-a2 = ¢
-a3 = £
-a4 = ¤
-a5 = ¥
-a6 = ¦
-a7 = §
-a8 = ¨
-a9 = ©
-aa = ª
-ab = «
-ac = ¬
-ad = ­
-ae = ®
-af = ¯
-b0 = °
-b1 = ±
-b2 = ²
-b3 = ³
-b4 = ´
-b5 = µ
-b6 = ¶
-b7 = ·
-b8 = ¸
-b9 = ¹
-ba = º
-bb = »
-bc = ¼
-bd = ½
-be = ¾
-bf = ¿
-c0 = À
-c1 = Á
-c2 = Â
-c3 = Ã
-c4 = Ä
-c5 = Å
-c6 = Æ
-c7 = Ç
-c8 = È
-c9 = É
-ca = Ê
-cb = Ë
-cc = Ì
-cd = Í
-ce = Î
-cf = Ï
-d0 = Ğ
-d1 = Ñ
-d2 = Ò
-d3 = Ó
-d4 = Ô
-d5 = Õ
-d6 = Ö
-d7 = ×
-d8 = Ø
-d9 = Ù
-da = Ú
-db = Û
-dc = Ü
-dd = İ
-de = Ş
-df = ß
-e0 = à
-e1 = á
-e2 = â
-e3 = ã
-e4 = ä
-e5 = å
-e6 = æ
-e7 = ç
-e8 = è
-e9 = é
-ea = ê
-eb = ë
-ec = ì
-ed = í
-ee = î
-ef = ï
-f0 = ğ
-f1 = ñ
-f2 = ò
-f3 = ó
-f4 = ô
-f5 = õ
-f6 = ö
-f7 = ÷
-f8 = ø
-f9 = ù
-fa = ú
-fb = û
-fc = ü
-fd = ı
-fe = ş
-ff = ÿ
+7f : Win= UTF=
+80 : Win=€ UTF=Â€
+81 : Win= UTF=Â
+82 : Win=‚ UTF=Â‚
+83 : Win=ƒ UTF=Âƒ
+84 : Win=„ UTF=Â„
+85 : Win=… UTF=Â…
+86 : Win=† UTF=Â†
+87 : Win=‡ UTF=Â‡
+88 : Win=ˆ UTF=Âˆ
+89 : Win=‰ UTF=Â‰
+8a : Win=Š UTF=ÂŠ
+8b : Win=‹ UTF=Â‹
+8c : Win=Œ UTF=ÂŒ
+8d : Win= UTF=Â
+8e : Win= UTF=Â
+8f : Win= UTF=Â
+90 : Win= UTF=Â
+91 : Win=‘ UTF=Â‘
+92 : Win=’ UTF=Â’
+93 : Win=“ UTF=Â“
+94 : Win=” UTF=Â”
+95 : Win=• UTF=Â•
+96 : Win=– UTF=Â–
+97 : Win=— UTF=Â—
+98 : Win=˜ UTF=Â˜
+99 : Win=™ UTF=Â™
+9a : Win=š UTF=Âš
+9b : Win=› UTF=Â›
+9c : Win=œ UTF=Âœ
+9d : Win= UTF=Â
+9e : Win= UTF=Â
+9f : Win=Ÿ UTF=ÂŸ
+a0 : Win=  UTF=Â 
+a1 : Win=¡ UTF=Â¡
+a2 : Win=¢ UTF=Â¢
+a3 : Win=£ UTF=Â£
+a4 : Win=¤ UTF=Â¤
+a5 : Win=¥ UTF=Â¥
+a6 : Win=¦ UTF=Â¦
+a7 : Win=§ UTF=Â§
+a8 : Win=¨ UTF=Â¨
+a9 : Win=© UTF=Â©
+aa : Win=ª UTF=Âª
+ab : Win=« UTF=Â«
+ac : Win=¬ UTF=Â¬
+ad : Win=­ UTF=Â­
+ae : Win=® UTF=Â®
+af : Win=¯ UTF=Â¯
+b0 : Win=° UTF=Â°
+b1 : Win=± UTF=Â±
+b2 : Win=² UTF=Â²
+b3 : Win=³ UTF=Â³
+b4 : Win=´ UTF=Â´
+b5 : Win=µ UTF=Âµ
+b6 : Win=¶ UTF=Â¶
+b7 : Win=· UTF=Â·
+b8 : Win=¸ UTF=Â¸
+b9 : Win=¹ UTF=Â¹
+ba : Win=º UTF=Âº
+bb : Win=» UTF=Â»
+bc : Win=¼ UTF=Â¼
+bd : Win=½ UTF=Â½
+be : Win=¾ UTF=Â¾
+bf : Win=¿ UTF=Â¿
+c0 : Win=À UTF=Ã€
+c1 : Win=Á UTF=Ã
+c2 : Win=Â UTF=Ã‚
+c3 : Win=Ã UTF=Ãƒ
+c4 : Win=Ä UTF=Ã„
+c5 : Win=Å UTF=Ã…
+c6 : Win=Æ UTF=Ã†
+c7 : Win=Ç UTF=Ã‡
+c8 : Win=È UTF=Ãˆ
+c9 : Win=É UTF=Ã‰
+ca : Win=Ê UTF=ÃŠ
+cb : Win=Ë UTF=Ã‹
+cc : Win=Ì UTF=ÃŒ
+cd : Win=Í UTF=Ã
+ce : Win=Î UTF=Ã
+cf : Win=Ï UTF=Ã
+d0 : Win=Ğ UTF=Ã
+d1 : Win=Ñ UTF=Ã‘
+d2 : Win=Ò UTF=Ã’
+d3 : Win=Ó UTF=Ã“
+d4 : Win=Ô UTF=Ã”
+d5 : Win=Õ UTF=Ã•
+d6 : Win=Ö UTF=Ã–
+d7 : Win=× UTF=Ã—
+d8 : Win=Ø UTF=Ã˜
+d9 : Win=Ù UTF=Ã™
+da : Win=Ú UTF=Ãš
+db : Win=Û UTF=Ã›
+dc : Win=Ü UTF=Ãœ
+dd : Win=İ UTF=Ã
+de : Win=Ş UTF=Ã
+df : Win=ß UTF=ÃŸ
+e0 : Win=à UTF=Ã 
+e1 : Win=á UTF=Ã¡
+e2 : Win=â UTF=Ã¢
+e3 : Win=ã UTF=Ã£
+e4 : Win=ä UTF=Ã¤
+e5 : Win=å UTF=Ã¥
+e6 : Win=æ UTF=Ã¦
+e7 : Win=ç UTF=Ã§
+e8 : Win=è UTF=Ã¨
+e9 : Win=é UTF=Ã©
+ea : Win=ê UTF=Ãª
+eb : Win=ë UTF=Ã«
+ec : Win=ì UTF=Ã¬
+ed : Win=í UTF=Ã­
+ee : Win=î UTF=Ã®
+ef : Win=ï UTF=Ã¯
+f0 : Win=ğ UTF=Ã°
+f1 : Win=ñ UTF=Ã±
+f2 : Win=ò UTF=Ã²
+f3 : Win=ó UTF=Ã³
+f4 : Win=ô UTF=Ã´
+f5 : Win=õ UTF=Ãµ
+f6 : Win=ö UTF=Ã¶
+f7 : Win=÷ UTF=Ã·
+f8 : Win=ø UTF=Ã¸
+f9 : Win=ù UTF=Ã¹
+fa : Win=ú UTF=Ãº
+fb : Win=û UTF=Ã»
+fc : Win=ü UTF=Ã¼
+fd : Win=ı UTF=Ã½
+fe : Win=ş UTF=Ã¾
+ff : Win=ÿ UTF=Ã¿
