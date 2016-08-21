@@ -170,7 +170,9 @@ var queue = [
     function() {
         info('Creating build dir');
         exec('rm -rf ' + baseDir, function() {
-            exec('mkdir -p ' + docDir + '/assets', next);
+            exec('rm -f ' + basePath + '.tgz', function() {
+                exec('mkdir -p ' + docDir + '/assets', next);
+            });
         });
 
     },
@@ -253,8 +255,7 @@ var queue = [
             stmt.finalize();
         });
 
-        db.close();
-        next();
+        db.close(next);
     },
 
     function() {
