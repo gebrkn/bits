@@ -8,25 +8,43 @@ var urlLib = require('url');
 var path = require('path');
 var sqlite3 = require('sqlite3');
 
-var baseURL = 'https://developer.chrome.com/extensions/';
-var docsetName = 'Chrome Extensions API';
-var baseDir = docsetName.replace(/ /g, '_') + '.docset/';
-var docDir = baseDir + 'Contents/Resources/Documents/';
+var baseURL, docsetName;
+
+switch (process.argv[2]) {
+    case 'extensions':
+        baseURL = 'https://developer.chrome.com/extensions/';
+        docsetName = 'Chrome Extensions API';
+        break;
+    case 'apps':
+        baseURL = 'https://developer.chrome.com/apps/';
+        docsetName = 'Chrome Apps API';
+        break;
+    default:
+        throw 'Usage: ' + process.argv[1] + ' extensions|apps';
+}
+
+var basePath = docsetName.replace(/ /g, '_');
+var baseDir =  basePath + '.docset';
+var docDir = baseDir + '/Contents/Resources/Documents/';
 var localPages = {};
 var index = {};
 var images = {};
 
 localPages[baseURL + 'api_index'] = 1;
 
+function info(s) {
+    console.log(s);
+}
+
 function getURL(url, fn) {
-    var fp = '/tmp/' + url.replace(/\W+/g, '_');
-    if(fs.existsSync(fp)) {
-        fn(url, fs.readFileSync(fp));
+    var tmp = '/tmp/chromeapi_' + url.replace(/\W+/g, '_');
+    if(fs.existsSync(tmp)) {
+        fn(url, fs.readFileSync(tmp));
         return;
     }
     request({url:url, encoding:null}, function (error, response, body) {
-        fs.writeFileSync(fp, body);
-        fn(url, fs.readFileSync(fp));
+        fs.writeFileSync(tmp, body);
+        fn(url, fs.readFileSync(tmp));
     });
 }
 
@@ -68,7 +86,7 @@ function saveHTML(url, doc) {
         '</main></div></body></html>'
     ].join('\n');
 
-    fs.writeFileSync(docDir + localFile(url), h);
+    fs.writeFileSync(docDir + '/' + localFile(url), h);
 }
 
 function localFile(url) {
@@ -150,13 +168,15 @@ function go() {
 var queue = [
 
     function() {
-        exec('rm -rf ' + docDir.split('/')[0], function() {
-            exec('mkdir -p ' + docDir + 'assets', next);
+        info('Creating build dir');
+        exec('rm -rf ' + baseDir, function() {
+            exec('mkdir -p ' + docDir + '/assets', next);
         });
 
     },
 
     function () {
+        info('Getting css');
         getURL('https://developer.chrome.com/static/css/out/site.css', function(url, text) {
             var override = [
                 '',
@@ -166,7 +186,7 @@ var queue = [
                 '* { font-family: "Lucida Grande",sans-serif }',
                 '.code, code, pre { font-family: Monaco,monospace; color:black }'
             ].join('\n');
-            fs.writeFileSync(docDir + 'assets/site.css', text + override);
+            fs.writeFileSync(docDir + '/assets/site.css', text + override);
             next();
         });
     },
@@ -177,6 +197,7 @@ var queue = [
             next();
             return;
         }
+        info('Fetching page ' + p);
         getHTML(p, function(url, doc) {
             var body = doc.find('main');
             var version = 0;
@@ -191,7 +212,7 @@ var queue = [
                     if(v)
                         version = Math.max(version, v);
                 });
-                console.log(version);
+                console.log('API version: ' + version);
             } else {
                 extractIndex(url, body);
             }
@@ -208,15 +229,18 @@ var queue = [
             next();
             return;
         }
+        info('Fetching image ' + p);
         getURL(p, function(url, text) {
-            fs.writeFileSync(docDir + 'assets/' + path.basename(url), text, {encoding:'binary'});
+            fs.writeFileSync(docDir + '/assets/' + path.basename(url), text, {encoding:'binary'});
             images[url] = 0;
             go();
         });
     },
 
     function() {
-        var db = new sqlite3.Database(baseDir + 'Contents/Resources/docSet.dsidx');
+        info('Writing index');
+
+        var db = new sqlite3.Database(baseDir + '/Contents/Resources/docSet.dsidx');
 
         db.serialize(function() {
             db.run("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)");
@@ -234,6 +258,8 @@ var queue = [
     },
 
     function() {
+        info('Writing plist');
+
         var plist = [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
@@ -255,8 +281,18 @@ var queue = [
             '</plist>',
             ''
         ].join('\n');
-        fs.writeFileSync(baseDir + 'Contents/Info.plist', plist);
+        fs.writeFileSync(baseDir + '/Contents/Info.plist', plist);
         next();
+    },
+
+    function() {
+        info('Compressing');
+        exec('tar czf ' + basePath + '.tgz ' + baseDir, next);
+    },
+
+
+    function() {
+        info('Done');
     }
 ];
 
