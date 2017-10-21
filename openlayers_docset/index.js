@@ -7,6 +7,7 @@ cd openlayers
 make apidoc
 cd ..
 node index.js
+open out/OpenLayers.docset
  */
 
 
@@ -48,14 +49,26 @@ function allFiles(dir) {
     return fpaths;
 }
 
+let dashPropName = {
+    'Methods': 'Method',
+    'Members': 'Member',
+    'Events': 'Event',
+    'Type Definitions': 'Type',
+    'Observable Properties': 'Property',
+    'Properties:': 'Property',
+    'Properties': 'Property',
+};
+
+function last(s) {
+    return s.split('.').pop();
+}
+
 function processHTML(fname, text) {
     console.log('>', fname);
 
     let $ = cheerio.load(text);
 
-    let title = $('.page-title').text();
-    let m = title.match(/(Class|Namespace):\s*(\S+)/);
-
+    let m = $('.page-title').text().match(/(Class|Namespace):\s*(\S+)/);
     if (!m)
         return null;
 
@@ -64,6 +77,39 @@ function processHTML(fname, text) {
     $('.navbar').remove();
     $('.navigation').remove();
     $('script').remove();
+
+    $('.subsection-title').each((_, el) => {
+        let title = $(el).text();
+        let sec = $(el).next();
+
+        if (!sec.length)
+            return;
+
+        switch (title) {
+            case 'Observable Properties':
+            case 'Properties:':
+                sec.find('table.props td.name code').each((_, el) => {
+                    let s = $(el).text().trim();
+                    toc.push([last(s), dashPropName[title], fname]);
+                });
+                break;
+
+
+            case 'Methods':
+            case 'Members':
+            case 'Events':
+            case 'Type Definitions':
+                sec.find('.nameContainer').each((_, el) => {
+                    let $el = $(el);
+                    if ($el.find('.inherited').length)
+                        return;
+                    let s = $el.find('h4.name').contents().first().text().trim();
+                    let a = $el.find('.anchor').attr('id');
+                    toc.push([last(s), dashPropName[title], fname + '#' + a]);
+                });
+                break;
+        }
+    });
 
     return $.html() + resetCss;
 }
