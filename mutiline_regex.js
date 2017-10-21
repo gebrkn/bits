@@ -42,3 +42,4 @@ console.log(re)
 s = '^keep ^9 [keep [2'
 
 console.log(s.replace(re, '@'))
+
