@@ -159,7 +159,7 @@
 
     var HTML = `
         <div id=reso_1>
-            / <input id=reso_re> /
+            / <input id=reso_re placeholder="regex"> /
             <label><input type=checkbox id=reso_flag_g>g </label>
             <label><input type=checkbox id=reso_flag_i>i </label>
             <label><input type=checkbox id=reso_flag_m>m </label>
@@ -168,7 +168,7 @@
         </div>
         <div id=reso_2>
             <div id=reso_02>
-                <textarea id=reso_text></textarea>
+                <textarea id=reso_text placeholder="sample text"></textarea>
             </div>
             <div id=reso_12>
                 <div id=reso_hilite></div>
@@ -191,7 +191,7 @@
         '#00897B',
         '#827717',
         '#F57F17',
-        '#BF360C',
+        '#1565C0',
     ];
 
     var URL = '';
@@ -274,7 +274,7 @@
         $$('reso_matches').innerHTML = format('<span>{0}</span>', matches.length);
         $$('reso_info').innerHTML = format('<table>{0}</table>', tab);
 
-        $$('reso_url').value = format('{0}?{1}&amp;.js',
+        $$('reso_url').value = format('{0}?{1}.js',
             URL,
             window.btoa(JSON.stringify([String(re), text]))
         );
@@ -311,7 +311,7 @@
 
         [].forEach.call(document.getElementsByTagName('script'), function (s) {
 
-            var m = String(s.src).match(/^(.+?reso\.js)\?([^&]+)/);
+            var m = String(s.src).match(/^(.+?reso\.js)(?:\?([^.]+))?/);
 
             if (m) {
                 URL = m[1];
