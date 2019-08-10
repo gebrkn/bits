@@ -1,45 +1,67 @@
 // Finally! write regexes in JS like a human
 
-function regex(modifiers) {
+RegExp.ext = function (str, ...args) {
+    let re = str.raw[0] + args.map((a, n) => a + str.raw[n + 1]),
+        flags = '',
+        m = re.match(/^\(\?([a-z]+)\)/);
 
-    return function() {
-
-        function escape(s) {
-            return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-        }
-
-        var args = [].slice.call(arguments);
-
-        var r = [].map.call(args[0], function (s, i) {
-            return s + escape(args[i + 1] || '');
-        })
-            .join('')
-            .replace(/#.*/g, '')
-            .replace(/\s+/g, '');
-
-        return new RegExp(r, modifiers);
+    if (m) {
+        re = re.slice(m[0].length);
+        flags += m[1];
     }
 
+    let fs = new Set(flags);
+
+    if (fs.delete('x')) {
+        re = re
+            .replace(/\\{2}/g, '\\x5c')
+            .replace(/\\#/g, '\\x23')
+            .replace(/#.*/g, '')
+            .replace(/\s+/g, '')
+            .trim();
+    }
+
+    return new RegExp(re, [...fs].join(''));
 }
 
-charsToRemove = '^[]-';
+// example
 
-re = regex('gm')`
-    [${charsToRemove}] # match these chars....
-    (?=\\d)            # if followed by a digit
+let number_re = RegExp.ext`(?xig)
+
+    #
+    # a number in the scientific notation
+    #
+
+    # optional sign
+    [+-] ?
+
+    # mantissa
+    (
+
+        # 12, 12. and 12.34
+        (
+            \d+           # integer part
+            ( \. \d* ) ?  # float part, optional
+        )
+
+        |  # or
+
+        # .12
+        (
+            \. \d+
+        )
+    )
+
+    # exponent, optional
+    (
+        e
+        [+-] ?  # sign, optional
+        \d+     # integer
+    )
+    ?
 `;
 
-/*
-    another option would be extending RegExp:
+let test = "some numbers 123 and 1.23 and .23 and 123.456e8 and 1.23E+45"
 
-    regex`...`.g.m
-
-*/
-
-
-console.log(re)
-
-s = '^keep ^9 [keep [2'
-
-console.log(s.replace(re, '@'))
-
+console.log('regex   ', number_re);
+console.log('matches ', test.match(number_re));
