@@ -4,7 +4,14 @@
 npm install
 git clone https://github.com/openlayers/openlayers
 cd openlayers
-make apidoc
+
+//make apidoc
+
+npm install
+touch src/ol/format/pbf.js
+npm run apidoc
+
+
 cd ..
 node index.js
 open out/OpenLayers.docset
@@ -24,7 +31,8 @@ let outDir = __dirname + '/out';
 let docsetDir = `${outDir}/${docsetName}.docset`;
 let docsDir = `${docsetDir}/Contents/Resources/Documents`;
 
-let srcDir = __dirname + '/openlayers/build/hosted/master/apidoc';
+//let srcDir = __dirname + '/openlayers/build/hosted/master/apidoc';
+let srcDir = __dirname + '/openlayers/build/apidoc';
 
 let resetCss = `
     <style>
@@ -68,7 +76,7 @@ function processHTML(fname, text) {
 
     let $ = cheerio.load(text);
 
-    let m = $('.page-title').text().match(/(Class|Namespace):\s*(\S+)/);
+    let m = $('.page-title').text().match(/(Class|Namespace|Module):\s*(\S+)/);
     if (!m)
         return null;
 
@@ -87,7 +95,8 @@ function processHTML(fname, text) {
 
         switch (title) {
             case 'Observable Properties':
-            case 'Properties:':
+            case 'Properties':
+            case 'Properties:': // sic!
                 sec.find('table.props td.name code').each((_, el) => {
                     let s = $(el).text().trim();
                     toc.push([last(s), dashPropName[title], fname]);
@@ -109,6 +118,11 @@ function processHTML(fname, text) {
                 });
                 break;
         }
+    });
+
+    $('a').each((_, el) => {
+        let $el = $(el);
+        $el.text($el.text().replace(/^module:/, ''))
     });
 
     return $.html() + resetCss;
